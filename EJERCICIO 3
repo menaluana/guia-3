@@ -1,0 +1,189 @@
+MAIN
+
+public class Main {
+    public static void main(String[] args) {
+
+        Vehiculo auto1 = new Automovil("renault", "kangoo", 110);
+        System.out.println(auto1.getMarca());
+        System.out.println(auto1.getModelo());
+        System.out.println(auto1.getVelocidadMaxima());
+        System.out.println(((Automovil)auto1).apagado());
+        System.out.println(((Automovil)auto1).encendido());
+        System.out.println(((Automovil)auto1).caragrGente());
+
+        Vehiculo camion1 = new Camiones("mercedes", "srv", 80, 100);
+        System.out.println(camion1.getMarca());
+        System.out.println(camion1.getModelo());
+        System.out.println(camion1.getVelocidadMaxima());
+        System.out.println(((Camiones)camion1).apagado());
+        System.out.println(((Camiones)camion1).encendido());
+        System.out.println(((Camiones)camion1).cargarCarga());
+
+        Vehiculo autobus1 = new Autobuses("mercedes", "sss", 100, 60);
+        System.out.println(autobus1.getMarca());
+        System.out.println(autobus1.getModelo());
+        System.out.println(autobus1.getVelocidadMaxima());
+        System.out.println(((Autobuses)autobus1).apagado());
+        System.out.println(((Autobuses)autobus1).encendido());
+        System.out.println(((Autobuses)autobus1).caragrGente());
+
+        }
+    }
+
+CLASE VEHICULO
+
+public abstract class Vehiculo {
+        String marca;
+        String modelo;
+        int velocidadMaxima;
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getVelocidadMaxima() {
+        return velocidadMaxima;
+    }
+
+    public void setVelocidadMaxima(int velocidadMaxima) {
+        this.velocidadMaxima = velocidadMaxima;
+    }
+
+    public Vehiculo(String marca, String modelo, int velocidadMaxima) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.velocidadMaxima = velocidadMaxima;
+    }
+    public Vehiculo() {
+        this.marca = "NoDefinido";
+        this.modelo = "NoDefinido";
+        this.velocidadMaxima = 0;
+    }
+
+
+}
+
+CLASE AUTOMOVILES
+
+public class Automovil extends Vehiculo implements iVehiculoPasajeros {
+    public Automovil(String marca, String modelo, int velocidadMaxima) {
+        super(marca, modelo, velocidadMaxima);
+    }
+
+    @Override
+    public String apagado() {
+        return null;
+    }
+
+    @Override
+    public String encendido() {
+        return "EL VEHICULO ESTA ENCEDIDO";
+    }
+
+    @Override
+    public String caragrGente() {
+        return "ESTE ES UN VEHICULO DE CARGA";
+    }
+
+}
+
+CLASE CAMIONES
+
+public class Camiones extends Vehiculo implements iVehiculoCarga{
+    int toneladas;
+
+    public int getToneladas() {
+        return toneladas;
+    }
+
+    public void setToneladas(int toneladas) {
+        this.toneladas = toneladas;
+    }
+
+    public Camiones(String marca, String modelo, int velocidadMaxima, int toneladas) {
+        super(marca, modelo, velocidadMaxima);
+        this.toneladas = toneladas;
+    }
+
+    @Override
+    public String encendido() {
+        return "EL VEHICULO ESTA ENCENDIDO";
+    }
+
+    @Override
+    public String apagado() {
+        return null;
+    }
+
+    @Override
+    public String cargarCarga() {
+        return "EL VEHICULO PUEDE CARGAR: " + toneladas + "TONELADAS";
+    }
+}
+
+CLASE AUTOBUSES
+
+public class Autobuses extends Vehiculo implements iVehiculoPasajeros {
+    int cantidadPersonas;
+
+    public int getCantidadPersonas() {
+        return cantidadPersonas;
+    }
+
+    public void setCantidadPersonas(int cantidadPersonas) {
+        this.cantidadPersonas = cantidadPersonas;
+    }
+
+    public Autobuses(String marca, String modelo, int velocidadMaxima, int cantidadPersonas) {
+        super(marca, modelo, velocidadMaxima);
+        this.cantidadPersonas = cantidadPersonas;
+    }
+
+    @Override
+    public String apagado() {
+        return "EL VEHICULO ESTA APAGADO";
+    }
+
+    @Override
+    public String encendido() {
+        return null;
+    }
+
+    @Override
+    public String caragrGente() {
+        return "EL VEHICULO PUEDE CARGAR: " + cantidadPersonas + "PERSONAS";
+    }
+
+}
+
+iVehiculos
+
+public interface iVehiculo {
+    public String apagado();
+    public String encendido();
+}
+
+
+iVehiculosCarga
+
+public interface iVehiculoCarga extends iVehiculo {
+    public String cargarCarga();
+}
+
+iVehiculosPasajeros
+
+public interface iVehiculoPasajeros extends iVehiculo {
+    public String caragrGente ();
+}
