@@ -1,0 +1,193 @@
+public class Main {
+    public static void main(String[] args) {
+        Criatura pato1 = new Pato("DONALD", "blanco", 200);
+        System.out.println(pato1.comer());
+        System.out.println(pato1.dormir());
+        System.out.println(((Pato)pato1).nadar());
+        System.out.println(((Pato) pato1).caminar());
+        System.out.println (((Pato) pato1).volar());
+        System.out.println(((Pato)pato1).sonido());
+
+        Criatura murcielago1 = new Murcielago("MURCI");
+        System.out.println(murcielago1.comer());
+        System.out.println(murcielago1.dormir());
+        System.out.println(((Murcielago)murcielago1).caminar());
+        System.out.println(((Murcielago)murcielago1).volar());
+        System.out.println(((Murcielago)murcielago1).sonido());
+
+        }
+    }
+
+CLASE CRIATURA
+public abstract class Criatura {
+    protected String nombre;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Criatura(String nombre) {
+        this.nombre = nombre;
+    }
+    public Criatura() {
+        this.nombre = "NoDefinido";
+    }
+
+
+    public abstract String comer();
+    public abstract String dormir();
+    public abstract String sonido();
+}
+
+CLASE PATO
+
+public class Pato extends Criatura implements CriaturaNadadora, CriaturaVoladora, CriaturaCaminadora {
+    String color;
+    int cantidadPlumas;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public int getCantidadPlumas() {
+        return cantidadPlumas;
+    }
+
+    public Pato(String nombre,String color, int cantidadPlumas) {
+        super(nombre);
+        this.color = color;
+        this.cantidadPlumas = cantidadPlumas;
+    }
+
+    public Pato() {
+        super();
+        this.color = "NoDefinido";
+        this.cantidadPlumas = 0;
+    }
+
+    public void setCantidadPlumas(int cantidadPlumas) {
+        this.cantidadPlumas = cantidadPlumas;
+    }
+
+    @Override
+    public String caminar() {
+        return "El pato camina ";
+    }
+
+    @Override
+    public String comer() {
+        return "El pato come pan";
+    }
+
+    @Override
+    public String dormir() {
+        return "El pato duermen en grupo";
+    }
+
+    @Override
+    public String volar() {
+        return "El pato vuela en grupo";
+    }
+
+    @Override
+    public String sonido() {
+        return "El pato hace quack";
+    }
+
+    @Override
+    public String nadar() {
+        return "El pato nada";
+    }
+}
+
+CLASE MURCIELAGO
+
+public class Murcielago extends Criatura implements CriaturaVoladora, CriaturaCaminadora  {
+
+    public Murcielago(String nombre) {
+        super(nombre);
+    }
+
+
+    @Override
+    public String comer() {
+        return "El murcielago come mosquitos";
+    }
+
+    @Override
+    public String dormir() {
+        return "El muercielago duerme de dìa";
+    }
+
+    @Override
+    public String volar() {
+       return "El murcielago vuela de noche";
+    }
+
+    @Override
+    public String caminar() {
+        return "El murcielago camina";
+    }
+
+    public String colgarse (){
+        return"El murcielago se cuelga";
+    }
+
+    @Override
+    public String sonido() {
+       return "El murcielago emite sonidos ultrasonicos";
+    }
+}
+
+CLASE PEZ
+
+public class Pez extends Criatura implements CriaturaNadadora {
+    public Pez(String nombre) {
+        super(nombre);
+    }
+
+    @Override
+    public String comer() {
+        return "El pez come algas";
+    }
+
+    @Override
+    public String dormir() {
+        return "El pez duerme bajo el agua";
+    }
+
+    @Override
+    public String nadar() {
+        return "El pez nada";
+    }
+
+    @Override
+    public String sonido() {
+        return "El pez hace un sonido causado por el movimiento de fricciòn de sus branquias";
+    }
+}
+
+INTERFACE CRIATURACAMINADORA
+(iCriaturaCaminadora)
+public interface CriaturaCaminadora {
+    public  String caminar();
+}
+
+INTERFACE CRIATURANADADORA
+(iCriaturaNadadora)
+public interface CriaturaNadadora {
+    public String nadar();
+
+}
+
+INTERFACE CRIATURAVOLADORA
+(iCriaturaVoladora)
+public interface CriaturaVoladora {
+    public String volar ();
+}
+
+
+
