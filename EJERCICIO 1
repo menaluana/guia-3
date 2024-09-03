@@ -1,0 +1,206 @@
+MAIN
+
+public class Main {
+    public static void main(String[] args) {
+        int nuevaVia = 228;
+        int altura = 30;
+        String parada = "Elissenbrunen";
+
+        Tranvia tranvia1 = new Tranvia("ruta 11", 500);
+        System.out.println(tranvia1.arrancar());
+        System.out.println(tranvia1.detener());
+        System.out.println(tranvia1.obtenerCapacidad());
+        System.out.println(tranvia1.cambiarVia(nuevaVia));
+
+        Bicicleta bici1 = new Bicicleta("Serie KPL");
+        System.out.println(bici1.arrancar());
+        System.out.println(bici1.detener());
+        System.out.println(bici1.obtenerCapacidad());
+        System.out.println(bici1.ajustarAciento(altura));
+
+        Autobus bondi1 = new Autobus(221, 60);
+        System.out.println(bondi1.arrancar());
+        System.out.println(bondi1.detener());
+        System.out.println(bondi1.obtenerCapacidad());
+        System.out.println(bondi1.anunciarParada(parada));
+
+        }
+    }
+
+ENUM TIPOTRANSPORTE
+
+public enum TipoTransporte {
+    AUTOBUS,
+    TRANVIA,
+    TREN,
+    BICICLETA;
+
+}
+
+CLASE TRANVIA
+
+public class Tranvia implements iTransporte {
+    private String ruta;
+    private int capacidad;
+    private TipoTransporte tranvia;
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public TipoTransporte getTranvia() {
+        return tranvia;
+    }
+
+    public void setTranvia(TipoTransporte tranvia) {
+        this.tranvia = tranvia;
+    }
+
+    public Tranvia(String ruta, int capacidad) {
+        this.ruta = ruta;
+        this.capacidad = capacidad;
+        this.tranvia = TipoTransporte.TRANVIA;
+    }
+
+    @Override
+    public String arrancar() {
+        return "El tranvia arranca";
+    }
+
+    @Override
+    public String detener() {
+        return "El tranvia no se detienen hasta la proxima parada";
+    }
+
+    @Override
+    public String obtenerCapacidad() {
+        return "La capacidad es de: "+ capacidad + " personas";
+    }
+    public String cambiarVia(int nuevaVia){
+        return "La nueva vìa es la " + nuevaVia;
+    }
+}
+
+CLASE BICICLETA
+
+public class Bicicleta implements iTransporte {
+    private String numeroSerie;
+    private TipoTransporte bicicleta;
+
+    public String getNumeroSerie() {
+        return numeroSerie;
+    }
+
+    public void setNumeroSerie(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
+    }
+
+    public TipoTransporte getBicicleta() {
+        return bicicleta;
+    }
+
+    public void setBicicleta(TipoTransporte bicicleta) {
+        this.bicicleta = bicicleta;
+    }
+
+    public Bicicleta(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
+        this.bicicleta = TipoTransporte.BICICLETA;
+    }
+
+    @Override
+    public String arrancar() {
+        return "La bicicleta no esta andando";
+    }
+
+    @Override
+    public String detener() {
+        return "La bicicleta esta detenida";
+    }
+
+    @Override
+    public String obtenerCapacidad() {
+        return "Capacidad = " + 1;
+    }
+    public String ajustarAciento(int altura){
+        return "La altura a la que se debe ajustar es: " + altura + "cm";
+    }
+}
+
+CLASE AUTOBUS
+
+public class Autobus implements iTransporte {
+    private int numeroLinea;
+    private int capacidad;
+    private TipoTransporte autobus;
+
+    public int getNumeroLinea() {
+        return numeroLinea;
+    }
+
+    public void setNumeroLinea(int numeroLinea) {
+        this.numeroLinea = numeroLinea;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public TipoTransporte getAutobus() {
+        return autobus;
+    }
+
+    public void setAutobus(TipoTransporte autobus) {
+        this.autobus = autobus;
+    }
+
+    public Autobus(int numeroLinea, int capacidad) {
+        this.numeroLinea = numeroLinea;
+        this.capacidad = capacidad;
+        this.autobus = TipoTransporte.AUTOBUS;
+    }
+
+    @Override
+    public String arrancar() {
+        return "El autobus esta avanzando";
+    }
+
+    @Override
+    public String detener() {
+        return "El autobus no esta detenido";
+    }
+
+    @Override
+    public String obtenerCapacidad() {
+        return "La capacidad que tiene el colectivo es de: " + capacidad + " personas";
+    }
+    public String anunciarParada (String parada){
+        return "La proxima parada es: " + parada;
+    }
+}
+
+ITRANSPORTE
+
+public interface iTransporte {
+    public String arrancar();
+
+    public String detener ();
+
+    public String obtenerCapacidad();
+}
